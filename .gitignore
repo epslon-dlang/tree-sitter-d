@@ -1,3 +1,7 @@
 node_modules/
 build/
 target/
+bindings/
+src/tree_sitter/
+src/*.json
+src/parser.c
