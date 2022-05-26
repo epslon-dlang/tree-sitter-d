@@ -2,7 +2,7 @@ module.exports = grammar({
   name: 'd',
 
   extras: $ => [
-    $.whitespace,
+    $._whitespace,
     $.comment,
   ],
 
@@ -44,7 +44,7 @@ module.exports = grammar({
     identifier: $ => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
 
     // https://dlang.org/spec/lex.html#WhiteSpace
-    whitespace: $ =>
+    _whitespace: $ =>
       token(
         /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
       ),
