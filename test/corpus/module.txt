@@ -1,0 +1,55 @@
+====================
+Empty source file w/ a simple module declaration
+====================
+module a;
+
+---
+
+(source_file
+  (module
+    (module_declaration
+      (module_fully_qualified_name
+       (identifier)
+      )
+    )
+  )
+)
+
+====================
+Empty source file w/ a composed module declaration
+====================
+module a.b.c;
+
+---
+
+(source_file
+  (module
+    (module_declaration
+      name: (module_fully_qualified_name
+       (identifier)
+       (identifier)
+       (identifier)
+      )
+    )
+  )
+)
+
+====================
+Empty source file w/ attributes attached to the module declaration
+====================
+deprecated module a;
+
+---
+
+(source_file
+  (module
+    (module_declaration
+      attributes: (module_attributes
+        (deprecated_attribute)
+      )
+      name: (module_fully_qualified_name
+       (identifier)
+      )
+    )
+  )
+)

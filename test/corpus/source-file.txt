@@ -1,0 +1,17 @@
+====================
+Empty source file
+====================
+
+---
+
+(source_file)
+
+====================
+Source file w/ a shebang
+====================
+#!/usr/bin/env rdmd
+
+---
+
+(source_file
+  (shebang))
