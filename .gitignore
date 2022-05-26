@@ -5,3 +5,4 @@ bindings/
 src/tree_sitter/
 src/*.json
 src/parser.c
+*.wasm
