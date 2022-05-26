@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/epslon-dlang/tree-sitter-d",
   "author": "Luís Ferreira <contact@lsferreira.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.16.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.6"
+  }
 }
