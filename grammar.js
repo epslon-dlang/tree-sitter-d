@@ -79,9 +79,12 @@ module.exports = grammar({
 
     // https://dlang.org/spec/grammar.html#Module
     module: $ =>
-      seq(
-        optional($.module_declaration),
-        $._decl_defs,
+      choice(
+        $.module_declaration,
+        seq(
+          optional($.module_declaration),
+          $._decl_defs,
+        ),
       ),
 
     // https://dlang.org/spec/grammar.html#ModuleDeclaration
