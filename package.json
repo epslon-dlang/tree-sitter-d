@@ -2,7 +2,7 @@
   "name": "tree-sitter-d",
   "version": "1.0.0",
   "description": "Tree-sitter grammar/parser for D programming language",
-  "main": "index.js",
+  "main": "bindings/node",
   "repository": "https://github.com/epslon-dlang/tree-sitter-d",
   "author": "Luís Ferreira <contact@lsferreira.net>",
   "license": "MIT",
