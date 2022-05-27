@@ -1,0 +1,40 @@
+---
+
+name: test
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  generate-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.0.2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install make gcc clang
+      - uses: actions/setup-python@v3.1.2
+      - uses: actions/setup-node@v3.2.0
+      - name: Generate and test grammar
+        run: |
+          yarn install --ignore-scripts
+          # Horrible hack: Yarn install fails because dependency order is not
+          # correct. I hate Javascript ecosystem, so I won't try to solve it
+          # here. If you are reading this and like Javascript, please do.
+          (cd node_modules/tree-sitter-cli; node install.js)
+
+          yarn run generate
+          yarn
+
+          # For some reason I'm not aware of, the install doesn't presist and
+          # need to be done again. This feels like it is, again, not the
+          # correct way to handle this.
+          (cd node_modules/tree-sitter-cli; node install.js)
+          yarn run test

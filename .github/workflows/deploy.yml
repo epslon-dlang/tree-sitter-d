@@ -1,0 +1,56 @@
+---
+
+name: deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+
+      - uses: actions/setup-python@v3.1.2
+      - uses: actions/setup-node@v3.2.0
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install make gcc clang
+      - name: Generate and build
+        run: |
+          yarn install --ignore-scripts
+          # Horrible hack: Yarn install fails because dependency order is not
+          # correct. I hate Javascript ecosystem, so I won't try to solve it
+          # here. If you are reading this and like Javascript, please do.
+          (cd node_modules/tree-sitter-cli; node install.js)
+
+          yarn run generate
+          yarn
+
+          # For some reason I'm not aware of, the install doesn't presist and
+          # need to be done again. This feels like it is, again, not the
+          # correct way to handle this.
+          (cd node_modules/tree-sitter-cli; node install.js)
+          yarn run build-wasm
+
+      - name: Deploy to release branch
+        run: |
+          pip install virtualenv
+          virtualenv venv -ppython3
+          venv/bin/pip install markdown-to-presentation
+
+          ./venv/bin/markdown-to-presentation push \
+            --default-branch main \
+            --pages-branch release \
+            bindings/ binding.gyp \
+            src/ Cargo.toml Cargo.lock \
+            package.json yarn.lock tree-sitter-d.wasm \
+            queries/ grammar.js
