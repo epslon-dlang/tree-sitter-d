@@ -4,7 +4,7 @@
       "target_name": "tree_sitter_d_binding",
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
-        "src"
+        "src",
       ],
       "sources": [
         "bindings/node/binding.cc",
@@ -12,7 +12,7 @@
       ],
       "cflags_c": [
         "-std=c99",
-      ]
-    }
-  ]
+      ],
+    },
+  ],
 }
