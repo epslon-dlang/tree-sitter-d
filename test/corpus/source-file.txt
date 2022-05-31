@@ -14,4 +14,5 @@ Source file w/ a shebang
 ---
 
 (module
-  (shebang))
+  (shebang)
+)
