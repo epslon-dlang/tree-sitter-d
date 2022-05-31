@@ -14,10 +14,15 @@ module.exports = grammar({
     // ========================================================================
 
     // https://dlang.org/spec/lex.html#SourceFile
+    // FIXME: Point to spec the wrong definitipn
     source_file: $ =>
       seq(
-        optional($.byte_order_mark),
-        optional($.shebang),
+        optional(
+          choice(
+            $.byte_order_mark,
+            $.shebang,
+          ),
+        ),
         optional($.module),
       ),
 
