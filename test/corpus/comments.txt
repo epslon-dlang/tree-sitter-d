@@ -6,7 +6,7 @@ Single line comment
 
 ---
 
-(source_file
+(module
   (line_comment)
 )
 
@@ -18,7 +18,7 @@ Single block comment
 
 ---
 
-(source_file
+(module
   (block_comment)
 )
 
@@ -31,7 +31,7 @@ Multiple block comments
 
 ---
 
-(source_file
+(module
   (block_comment)
   (block_comment)
 )
@@ -45,7 +45,7 @@ Multiple line comments
 
 ---
 
-(source_file
+(module
   (line_comment)
   (line_comment)
 )
@@ -63,19 +63,17 @@ private {} // private
 
 ---
 
-(source_file
-  (module
-    (module_declaration
-      (module_fully_qualified_name
-        (identifier)
-      )
+(module
+  (module_declaration
+    (module_fully_qualified_name
+      (identifier)
     )
-    (line_comment)
-    (block_comment)
-    (attribute_specifier
-      (visibility_attribute)
-      (declaration_block)
-    )
+  )
+  (line_comment)
+  (block_comment)
+  (attribute_specifier
+    (visibility_attribute)
+    (declaration_block)
   )
   (line_comment)
 )

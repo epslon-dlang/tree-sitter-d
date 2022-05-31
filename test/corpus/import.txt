@@ -7,24 +7,22 @@ import std.stdio;
 
 ---
 
-(source_file
-  (module
-    (import_declaration
-      (import_list
-        (import
-          (module_fully_qualified_name
-            (identifier)
-          )
+(module
+  (import_declaration
+    (import_list
+      (import
+        (module_fully_qualified_name
+          (identifier)
         )
       )
     )
-    (import_declaration
-      (import_list
-        (import
-          (module_fully_qualified_name
-            (identifier)
-            (identifier)
-          )
+  )
+  (import_declaration
+    (import_list
+      (import
+        (module_fully_qualified_name
+          (identifier)
+          (identifier)
         )
       )
     )
@@ -39,16 +37,14 @@ import stdio = std.stdio;
 
 ---
 
-(source_file
-  (module
-    (import_declaration
-      imports: (import_list
-        (import
-          alias: (identifier)
-          module: (module_fully_qualified_name
-            (identifier)
-            (identifier)
-          )
+(module
+  (import_declaration
+    imports: (import_list
+      (import
+        alias: (identifier)
+        module: (module_fully_qualified_name
+          (identifier)
+          (identifier)
         )
       )
     )
@@ -64,21 +60,19 @@ import std.stdio,
 
 ---
 
-(source_file
-  (module
-    (import_declaration
-      imports: (import_list
-        (import
-          module: (module_fully_qualified_name
-            (identifier)
-            (identifier)
-          )
+(module
+  (import_declaration
+    imports: (import_list
+      (import
+        module: (module_fully_qualified_name
+          (identifier)
+          (identifier)
         )
-        (import
-          module: (module_fully_qualified_name
-            (identifier)
-            (identifier)
-          )
+      )
+      (import
+        module: (module_fully_qualified_name
+          (identifier)
+          (identifier)
         )
       )
     )
@@ -95,32 +89,30 @@ import std.stdio,
 
 ---
 
-(source_file
-  (module
-    (import_declaration
-      (import_list
+(module
+  (import_declaration
+    (import_list
+      (import
+        (module_fully_qualified_name
+          (identifier)
+          (identifier)
+        )
+      )
+      (import
+        (module_fully_qualified_name
+          (identifier)
+          (identifier)
+        )
+      )
+      (import_bindings
         (import
           (module_fully_qualified_name
             (identifier)
             (identifier)
           )
         )
-        (import
-          (module_fully_qualified_name
-            (identifier)
-            (identifier)
-          )
-        )
-        (import_bindings
-          (import
-            (module_fully_qualified_name
-              (identifier)
-              (identifier)
-            )
-          )
-          (import_bind
-            (identifier)
-          )
+        (import_bind
+          (identifier)
         )
       )
     )

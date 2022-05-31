@@ -4,7 +4,7 @@ Empty source file
 
 ---
 
-(source_file)
+(module)
 
 ====================
 Source file w/ a shebang
@@ -13,5 +13,5 @@ Source file w/ a shebang
 
 ---
 
-(source_file
+(module
   (shebang))
