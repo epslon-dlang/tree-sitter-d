@@ -13,6 +13,11 @@ module.exports = grammar({
     [$.module_attributes, $._attribute],
   ],
 
+  supertypes: $ => [
+    $._attribute,
+    $._declaration,
+  ],
+
   rules: {
     // ========================================================================
     // Source file
