@@ -3,7 +3,8 @@ module.exports = grammar({
 
   extras: $ => [
     $._whitespace,
-    $.comment,
+    $.line_comment,
+    $.block_comment,
   ],
 
   word: $ => $.identifier,
@@ -75,7 +76,7 @@ module.exports = grammar({
     // https://dlang.org/spec/lex.html#LineComment
     line_comment: $ =>
       token(
-        seq('//', /(\\(.|\r?\n)|[^\\\n])*/)
+        seq('//', /(\\(.|\r?\n)|[^\\\n])*/),
       ),
 
     // ========================================================================

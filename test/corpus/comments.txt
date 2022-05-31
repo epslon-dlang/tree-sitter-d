@@ -1,0 +1,81 @@
+====================
+Single line comment
+====================
+
+// this is a line comment
+
+---
+
+(source_file
+  (line_comment)
+)
+
+====================
+Single block comment
+====================
+
+/* this is a block comment */
+
+---
+
+(source_file
+  (block_comment)
+)
+
+====================
+Multiple block comments
+====================
+
+/* this is a block comment */
+/* this is another block comment */
+
+---
+
+(source_file
+  (block_comment)
+  (block_comment)
+)
+
+====================
+Multiple line comments
+====================
+
+// this is a line comment
+// this is another line comment
+
+---
+
+(source_file
+  (line_comment)
+  (line_comment)
+)
+
+====================
+Comments inside module
+====================
+
+module foo;
+
+// this is a line comment
+/* this is a block comment */
+
+private {} // private
+
+---
+
+(source_file
+  (module
+    (module_declaration
+      (module_fully_qualified_name
+        (identifier)
+      )
+    )
+    (line_comment)
+    (block_comment)
+    (attribute_specifier
+      (visibility_attribute)
+      (declaration_block)
+    )
+  )
+  (line_comment)
+)
