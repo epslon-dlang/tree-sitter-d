@@ -98,7 +98,7 @@ module.exports = grammar({
         $.module_declaration,
         seq(
           optional($.module_declaration),
-          $._decl_defs,
+          repeat1($._decl_def),
         ),
       ),
 
@@ -168,12 +168,6 @@ module.exports = grammar({
     // Declarations
     // ========================================================================
 
-    // https://dlang.org/spec/grammar.html#DeclDefs
-    _decl_defs: $ =>
-      repeat1(
-        $._decl_def,
-      ),
-
     // https://dlang.org/spec/grammar.html#DeclDef
     _decl_def: $ =>
         // TODO: Add other declarations
@@ -212,7 +206,7 @@ module.exports = grammar({
     declaration_block: $ =>
       seq(
         '{',
-        optional($._decl_defs),
+        repeat($._decl_def),
         '}',
       ),
 
@@ -256,6 +250,80 @@ module.exports = grammar({
         'protected',
         'public',
         'export',
+      ),
+
+    // ========================================================================
+    // Types
+    // ========================================================================
+
+    // https://dlang.org/spec/type.html#Type
+    type: $ =>
+      seq(
+        field('qualifiers', repeat($.type_qualifier)),
+        $._basic_type,
+        field('suffixes', repeat($.type_suffix)),
+      ),
+
+    // https://dlang.org/spec/type.html#TypeCtor
+    type_qualifier: $ =>
+      choice(
+        'const',
+        'immutable',
+        'inout',
+        'shared',
+      ),
+
+    type_suffix: $ =>
+      // TODO: Add all the suffixes
+      choice(
+        '*',
+        seq('[', ']'),
+      ),
+
+    // https://dlang.org/spec/type.html#BasicType
+    _basic_type: $ =>
+      // TODO: Add all basic types
+      choice(
+        $.vector_type,
+        $.fundamental_type,
+      ),
+
+    // https://dlang.org/spec/type.html#FundamentalType
+    fundamental_type: $ =>
+      choice(
+        'bool',
+        'byte',
+        'ubyte',
+        'short',
+        'ushort',
+        'int',
+        'uint',
+        'long',
+        'ulong',
+        'cent',
+        'ucent',
+        'char',
+        'wchar',
+        'dchar',
+        'float',
+        'double',
+        'real',
+        'ifloat',
+        'idouble',
+        'ireal',
+        'cfloat',
+        'cdouble',
+        'creal',
+        'void',
+      ),
+
+    // https://dlang.org/spec/type.html#Vector
+    vector_type: $ =>
+      seq(
+        '__vector',
+        '(',
+        field('base', $.type),
+        ')',
       ),
   }
 });
