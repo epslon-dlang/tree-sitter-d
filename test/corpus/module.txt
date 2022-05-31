@@ -5,12 +5,10 @@ module a;
 
 ---
 
-(source_file
-  (module
-    (module_declaration
-      (module_fully_qualified_name
-       (identifier)
-      )
+(module
+  (module_declaration
+    (module_fully_qualified_name
+     (identifier)
     )
   )
 )
@@ -22,14 +20,12 @@ module a.b.c;
 
 ---
 
-(source_file
-  (module
-    (module_declaration
-      name: (module_fully_qualified_name
-       (identifier)
-       (identifier)
-       (identifier)
-      )
+(module
+  (module_declaration
+    name: (module_fully_qualified_name
+     (identifier)
+     (identifier)
+     (identifier)
     )
   )
 )
@@ -41,15 +37,13 @@ deprecated module a;
 
 ---
 
-(source_file
-  (module
-    (module_declaration
-      attributes: (module_attributes
-        (deprecated_attribute)
-      )
-      name: (module_fully_qualified_name
-       (identifier)
-      )
+(module
+  (module_declaration
+    attributes: (module_attributes
+      (deprecated_attribute)
+    )
+    name: (module_fully_qualified_name
+     (identifier)
     )
   )
 )

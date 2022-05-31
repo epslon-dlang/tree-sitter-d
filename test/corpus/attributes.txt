@@ -13,23 +13,9 @@ private {
 
 ---
 
-(source_file
-  (module
-    (attribute_specifier
-      (visibility_attribute)
-      (import_declaration
-        (import_list
-          (import
-            (module_fully_qualified_name
-              (identifier)
-            )
-          )
-        )
-      )
-    )
-    (attribute_specifier
-      (visibility_attribute)
-    )
+(module
+  (attribute_specifier
+    (visibility_attribute)
     (import_declaration
       (import_list
         (import
@@ -39,15 +25,27 @@ private {
         )
       )
     )
-    (attribute_specifier
-      (visibility_attribute)
-      (declaration_block
-        (import_declaration
-          (import_list
-            (import
-              (module_fully_qualified_name
-                (identifier)
-              )
+  )
+  (attribute_specifier
+    (visibility_attribute)
+  )
+  (import_declaration
+    (import_list
+      (import
+        (module_fully_qualified_name
+          (identifier)
+        )
+      )
+    )
+  )
+  (attribute_specifier
+    (visibility_attribute)
+    (declaration_block
+      (import_declaration
+        (import_list
+          (import
+            (module_fully_qualified_name
+              (identifier)
             )
           )
         )

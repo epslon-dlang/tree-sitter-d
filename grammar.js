@@ -19,8 +19,9 @@ module.exports = grammar({
     // ========================================================================
 
     // https://dlang.org/spec/lex.html#SourceFile
+    // First node is called module for convenience
     // FIXME: Point to spec the wrong definition
-    source_file: $ =>
+    module: $ =>
       seq(
         optional(
           choice(
@@ -28,7 +29,7 @@ module.exports = grammar({
             $.shebang,
           ),
         ),
-        optional($.module),
+        optional($._module),
       ),
 
     // https://dlang.org/spec/lex.html#ByteOrderMark
@@ -88,7 +89,7 @@ module.exports = grammar({
     // ========================================================================
 
     // https://dlang.org/spec/grammar.html#Module
-    module: $ =>
+    _module: $ =>
       choice(
         $.module_declaration,
         seq(
