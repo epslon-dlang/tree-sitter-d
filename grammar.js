@@ -20,7 +20,6 @@ module.exports = grammar({
 
     // https://dlang.org/spec/lex.html#SourceFile
     // First node is called module for convenience
-    // FIXME: Point to spec the wrong definition
     module: $ =>
       seq(
         optional(
