@@ -9,6 +9,10 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
+  conflicts: $ => [
+    [$.module_attributes, $._attribute],
+  ],
+
   rules: {
     // ========================================================================
     // Source file
@@ -169,8 +173,9 @@ module.exports = grammar({
     _decl_def: $ =>
         // TODO: Add other declarations
         choice(
-          $.empty_declaration,
+          $.attribute_specifier,
           $._declaration,
+          $.empty_declaration,
         ),
 
     // https://dlang.org/spec/grammar.html#EmptyDeclaration
@@ -192,9 +197,39 @@ module.exports = grammar({
         ';',
       ),
 
+    // https://dlang.org/spec/attribute.html#DeclarationBlock
+    _declaration_block: $ =>
+      choice(
+        $._decl_def,
+        $.declaration_block,
+      ),
+
+    declaration_block: $ =>
+      seq(
+        '{',
+        optional($._decl_defs),
+        '}',
+      ),
+
     // ========================================================================
     // Attributes
     // ========================================================================
+
+    // https://dlang.org/spec/attribute.html#AttributeSpecifier
+    attribute_specifier: $ =>
+      seq(
+        $._attribute,
+        choice(
+          ':',
+          $._declaration_block,
+        ),
+      ),
+
+    _attribute: $ =>
+      choice(
+        $.deprecated_attribute,
+        $.visibility_attribute,
+      ),
 
     // https://dlang.org/spec/grammar.html#ModuleAttributes
     module_attributes: $ =>
@@ -208,6 +243,15 @@ module.exports = grammar({
       // TODO: Add assign expression
       'deprecated',
 
+    // https://dlang.org/spec/attribute.html#VisibilityAttribute
+    visibility_attribute: $ =>
+      // TODO: Implement package visibility attribute
+      choice(
+        'private',
+        'protected',
+        'public',
+        'export',
+      ),
   }
 });
 
