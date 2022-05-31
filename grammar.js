@@ -19,7 +19,7 @@ module.exports = grammar({
     // ========================================================================
 
     // https://dlang.org/spec/lex.html#SourceFile
-    // FIXME: Point to spec the wrong definitipn
+    // FIXME: Point to spec the wrong definition
     source_file: $ =>
       seq(
         optional(
