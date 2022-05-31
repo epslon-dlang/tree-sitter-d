@@ -1,0 +1,128 @@
+====================
+Import single module
+====================
+
+import std;
+import std.stdio;
+
+---
+
+(source_file
+  (module
+    (import_declaration
+      (import_list
+        (import
+          (module_fully_qualified_name
+            (identifier)
+          )
+        )
+      )
+    )
+    (import_declaration
+      (import_list
+        (import
+          (module_fully_qualified_name
+            (identifier)
+            (identifier)
+          )
+        )
+      )
+    )
+  )
+)
+
+====================
+Import single module w/ alias
+====================
+
+import stdio = std.stdio;
+
+---
+
+(source_file
+  (module
+    (import_declaration
+      imports: (import_list
+        (import
+          alias: (identifier)
+          module: (module_fully_qualified_name
+            (identifier)
+            (identifier)
+          )
+        )
+      )
+    )
+  )
+)
+
+====================
+Import multiple modules
+====================
+
+import std.stdio,
+       std.algorithm;
+
+---
+
+(source_file
+  (module
+    (import_declaration
+      imports: (import_list
+        (import
+          module: (module_fully_qualified_name
+            (identifier)
+            (identifier)
+          )
+        )
+        (import
+          module: (module_fully_qualified_name
+            (identifier)
+            (identifier)
+          )
+        )
+      )
+    )
+  )
+)
+
+====================
+Import multiple modules w/ bindings
+====================
+
+import std.stdio,
+       std.algorithm,
+       std.range : front;
+
+---
+
+(source_file
+  (module
+    (import_declaration
+      (import_list
+        (import
+          (module_fully_qualified_name
+            (identifier)
+            (identifier)
+          )
+        )
+        (import
+          (module_fully_qualified_name
+            (identifier)
+            (identifier)
+          )
+        )
+        (import_bindings
+          (import
+            (module_fully_qualified_name
+              (identifier)
+              (identifier)
+            )
+          )
+          (import_bind
+            (identifier)
+          )
+        )
+      )
+    )
+  )
+)

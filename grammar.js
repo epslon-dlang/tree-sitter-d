@@ -103,6 +103,52 @@ module.exports = grammar({
         '.',
       ),
 
+    // https://dlang.org/spec/grammar.html#ImportList
+    import_list: $ =>
+      seq(
+        repeat(
+          seq(
+            $.import,
+            ',',
+          ),
+        ),
+        choice(
+          $.import,
+          $.import_bindings,
+        ),
+      ),
+
+    // https://dlang.org/spec/grammar.html#Import
+    import: $ =>
+      seq(
+        optional(seq(field('alias', $.identifier), '=')),
+        field('module', $.module_fully_qualified_name),
+      ),
+
+    // https://dlang.org/spec/module.html#ImportBindings
+    import_bindings: $ =>
+      seq(
+        $.import,
+        ':',
+        $._import_bind_list,
+      ),
+
+    // https://dlang.org/spec/module.html#ImportBindList
+    _import_bind_list: $ =>
+      seq(
+        repeat(
+          seq($.import_bind, ','),
+        ),
+        $.import_bind,
+      ),
+
+    // https://dlang.org/spec/module.html#ImportBind
+    import_bind: $ =>
+      seq(
+        $.identifier, optional(seq('=', $.identifier)),
+      ),
+
+
     // ========================================================================
     // Declarations
     // ========================================================================
@@ -116,11 +162,29 @@ module.exports = grammar({
     // https://dlang.org/spec/grammar.html#DeclDef
     _decl_def: $ =>
         // TODO: Add other declarations
-        $.empty_declaration,
+        choice(
+          $.empty_declaration,
+          $._declaration,
+        ),
 
     // https://dlang.org/spec/grammar.html#EmptyDeclaration
     empty_declaration: $ =>
         ';',
+
+    // https://dlang.org/spec/declaration.html#Declaration
+    _declaration: $ =>
+      choice(
+        $.import_declaration,
+      ),
+
+    // https://dlang.org/spec/grammar.html#ImportDeclaration
+    import_declaration: $ =>
+      seq(
+        optional('static'),
+        'import',
+        field('imports', $.import_list),
+        ';',
+      ),
 
     // ========================================================================
     // Attributes
