@@ -54,3 +54,5 @@ jobs:
             src/ Cargo.toml Cargo.lock \
             package.json yarn.lock tree-sitter-d.wasm \
             queries/ grammar.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
