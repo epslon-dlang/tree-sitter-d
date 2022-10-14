@@ -21,7 +21,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install make gcc clang
       - uses: actions/setup-python@v3.1.2
-      - uses: actions/setup-node@v3.2.0
+      - uses: actions/setup-node@v3.5.1
       - name: Generate and test grammar
         run: |
           yarn install --ignore-scripts
